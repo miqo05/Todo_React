@@ -19,7 +19,7 @@ function App() {
 		]);
 	};
 
-	function deleteAllTodos  () {
+	const deleteAllTodos = () => {
 		setTodos([]);
 	};
 
