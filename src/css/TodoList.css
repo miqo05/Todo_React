@@ -1,12 +1,18 @@
-.note{
+.note {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	text-wrap: wrap;
-	background-color: teal;
 	color: whitesmoke;
 	border-radius: 4px;
 	margin: 10px;
 	padding: 5px;
+}
+
+.note-done {
+	background-color: green;
+}
+
+.note-notDone {
+	background-color: red;
 }

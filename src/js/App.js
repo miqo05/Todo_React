@@ -3,40 +3,43 @@ import '../css/App.css';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
-
 function App() {
-	const [todos, setTodos] = useState([])
+	const [todos, setTodos] = useState([]);
+
+	const addNewItem = (text) => {
+		if (text === '') return;
+
+		setTodos([
+			...todos,
+			{
+				id: Math.random(),
+				text: text,
+				isDone: false,
+			},
+		]);
+	};
+
+	const deleteAllTodos = () => {
+		setTodos([]);
+	};
+
+	const doneTodo = (todo) => {
+		const updatedTodos = todos.map((item) =>
+			item.id === todo.id ? todo : item
+		);
+		setTodos(updatedTodos);
+	};
+
+	const deleteTodo = (todo) => {
+		setTodos(todos.filter((to) => to.id !== todo.id));
+	};
 
 	return (
 		<div className='container'>
-			<TodoForm 
-				addNewItem={function(text) {
-					if(text === '') return;
-
-					setTodos([
-						...todos,
-						{
-							id: Math.random(),
-							text: text,
-						}
-					])
-				}}
-
-				DeleteAllTodos={function() {
-					setTodos([]);
-				}}
-			/>
-			<TodoList 
-				todos={ todos }
-
-				deleteTodo={function(todo) {
-					setTodos(todos.filter(function(to) {
-						return to.id !== todo.id;
-					}))
-				}}
-			/>
+			<TodoForm addNewItem={addNewItem} deleteAllTodos={deleteAllTodos} />
+			<TodoList todos={todos} doneTodo={doneTodo} deleteTodo={deleteTodo} />
 		</div>
-	)
+	);
 }
 
 export default App;
