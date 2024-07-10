@@ -10,9 +10,11 @@
 }
 
 .note-done {
-	background-color: green;
+	background-color: teal;
+	opacity: 0.5;
+	text-decoration: line-through;
 }
 
 .note-notDone {
-	background-color: red;
+	background-color: teal;
 }

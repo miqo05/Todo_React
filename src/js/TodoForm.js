@@ -3,7 +3,7 @@ import '../css/AllTodosAdd.css';
 import '../css/AllTodosDelete.css';
 import '../css/TodoForm.css';
 
-function TodoForm({ addNewItem, DeleteAllTodos }) {
+function TodoForm({ addNewItem, deleteAllTodos }) {
 	let [text, setText] = useState('');
 
 	return (
@@ -24,7 +24,7 @@ function TodoForm({ addNewItem, DeleteAllTodos }) {
 				}}
 			></input>
 			<button className='AllTodosAdd'>Add</button>
-			<button onClick={DeleteAllTodos} className='AllTodosDelete'>Delete</button>
+			<button onClick={deleteAllTodos} className='AllTodosDelete'>Delete</button>
 		</form>
 	)
 }
