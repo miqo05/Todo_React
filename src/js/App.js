@@ -45,7 +45,7 @@ function App() {
 	const handleSearchClick = (text, setText) => {
 		setOldTodos([...todos]);
 		const filteredTodos = todos.filter(todo => {
-			if(todo.text.includes(text)) {
+			if(todo.text.toLowerCase().includes(text.toLowerCase())) {
 				return todo;
 			}
 		})
