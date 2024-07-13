@@ -5,8 +5,10 @@ import TodoList from './TodoList';
 
 function App() {
 	const [todos, setTodos] = useState([]);
+	const [oldTodods, setOldTodos] = useState([]);
 
-	const addNewItem = (text) => {
+	//for adding new todo
+	const addNewItem = (text, setText) => {
 		if (text === '') return;
 
 		setTodos([
@@ -17,12 +19,16 @@ function App() {
 				isDone: false,
 			},
 		]);
+		setText('');
 	};
 
+	//for deleting all todos
 	const deleteAllTodos = () => {
 		setTodos([]);
+		setOldTodos([]);
 	};
 
+	//for changing todo state into done 
 	const doneTodo = (todo) => {
 		const updatedTodos = todos.map((item) =>
 			item.id === todo.id ? todo : item
@@ -30,13 +36,57 @@ function App() {
 		setTodos(updatedTodos);
 	};
 
+	//for deleting todo
 	const deleteTodo = (todo) => {
 		setTodos(todos.filter((to) => to.id !== todo.id));
 	};
 
+	//for searching 
+	const handleSearchClick = (text, setText) => {
+		setOldTodos([...todos]);
+		const filteredTodos = todos.filter(todo => {
+			if(todo.text.includes(text)) {
+				return todo;
+			}
+		})
+		setTodos(filteredTodos);
+		setText('');
+	}
+
+	//for returning old state 
+	const handleUndoClick = () => {
+		setTodos([...oldTodods])
+	}
+
+	//for searching done todos 
+	const handleDoneClick = () => {
+		setOldTodos([...todos]);
+		const doneTodos = todos.filter(todo => {
+			return todo.isDone === true;
+		})
+		setTodos([...doneTodos]);
+	}
+
+	//for searching undone todos
+	const handleUndoneClick = () => {
+		setOldTodos([...todos]);
+		const undoneTodos = todos.filter(todo => {
+			return todo.isDone === false;
+		})
+		setTodos([...undoneTodos]);
+	}
+
 	return (
 		<div className='container'>
-			<TodoForm addNewItem={addNewItem} deleteAllTodos={deleteAllTodos} />
+			<TodoForm 
+				addNewItem={addNewItem} 
+				deleteAllTodos={deleteAllTodos} 
+				handleSearchClick ={handleSearchClick}
+				handleUndoClick ={handleUndoClick} 
+				handleDoneClick={handleDoneClick}
+				handleUndoneClick={handleUndoneClick}
+				/>
+
 			<TodoList todos={todos} doneTodo={doneTodo} deleteTodo={deleteTodo} />
 		</div>
 	);

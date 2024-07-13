@@ -1,0 +1,31 @@
+.todosSearch, .AllTodosDelete, .todosUndo, .todosAll, .todosDone, .todosUndone {
+	height: 40px;
+	width: 90px;
+	margin-left: 6px;
+	margin-top: 6px;
+	cursor: pointer;
+	border: none;
+	background-color: teal;
+	color: white;
+} 
+
+.AllTodosAdd {
+	height: 40px;
+	width: 90px;
+	margin-top: 6px;
+	cursor: pointer;
+	border: none;
+	background-color: teal;
+	color: white;
+}
+
+.todosSearch:hover, .AllTodosDelete:hover, .todosUndo:hover, .AllTodosAdd:hover, 
+.todosAll:hover, .todosDone:hover, .todosUndone:hover {
+	color: turquoise;
+}
+
+.ButtonsSpace {
+	display: flex;
+	justify-content: space-around;
+
+}
