@@ -20,8 +20,15 @@ function TodoForm({
 		className='input_space' 
 		value={ text }
 		placeholder='Input yor text...'
+
 		onChange={function(event) {
 			setText(event.target.value);
+		}}
+		
+		onKeyPress={(event) => {
+			if(event.key === 'Enter') {
+				addNewItem(text, setText)
+			}
 		}}
 	></input>
 
