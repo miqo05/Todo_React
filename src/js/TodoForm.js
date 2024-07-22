@@ -6,7 +6,7 @@ function TodoForm({
 	addNewItem, 
 	deleteAllTodos, 
 	handleSearchClick, 
-	handleUndoClick, 
+	handleAllClick, 
 	handleDoneClick,
 	handleUndoneClick}) {
 	let [text, setText] = useState('');
@@ -60,9 +60,9 @@ function TodoForm({
 		{/* button for returnin into old state */}
 		<button 
 			className='todosUndo'
-			onClick={handleUndoClick}
+			onClick={handleAllClick}
 		>
-			Undo
+			All
 		</button>
 
 		{/* button for searching done todos */}

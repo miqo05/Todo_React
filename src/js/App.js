@@ -19,6 +19,8 @@ function App() {
 				isDone: false,
 			},
 		]);
+		
+		setOldTodos(todos)
 		setText('');
 	};
 
@@ -30,6 +32,7 @@ function App() {
 
 	//for changing todo state into done 
 	const doneTodo = (todo) => {
+		setOldTodos(todos)
 		const updatedTodos = todos.map((item) =>
 			item.id === todo.id ? todo : item
 		);
@@ -39,6 +42,7 @@ function App() {
 	//for deleting todo
 	const deleteTodo = (todo) => {
 		setTodos(todos.filter((to) => to.id !== todo.id));
+		setOldTodos(todos)
 	};
 
 	//for searching 
@@ -54,8 +58,8 @@ function App() {
 	}
 
 	//for returning old state 
-	const handleUndoClick = () => {
-		setTodos([...oldTodods])
+	const handleAllClick = () => {
+		setTodos([...oldTodods]);
 	}
 
 	//for searching done todos 
@@ -82,7 +86,7 @@ function App() {
 				addNewItem={addNewItem} 
 				deleteAllTodos={deleteAllTodos} 
 				handleSearchClick ={handleSearchClick}
-				handleUndoClick ={handleUndoClick} 
+				handleAllClick ={handleAllClick} 
 				handleDoneClick={handleDoneClick}
 				handleUndoneClick={handleUndoneClick}
 				/>
