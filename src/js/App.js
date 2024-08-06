@@ -1,24 +1,68 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import '../css/App.css';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
+function reducer(state, action) {
+	switch(action.type) {
+		case 'add': 
+			return [
+				...state, 
+				action.payload
+			]
+		
+		case 'delete_all': 
+			return []
+
+		case 'done':
+			return [
+				...action.payload
+			]
+
+		case 'delete_todo': 
+			return [
+				...action.payload
+			]
+
+		case 'search': 
+			return [
+				...action.payload
+			]
+
+			case 'all':
+				return [
+					...action.payload
+				]
+
+			case 'filter_done_todos':
+				return [
+					...action.payload
+				]
+
+			case 'filter_undone_todos':
+				return [
+					...action.payload
+				]
+	}
+
+}
+
 function App() {
-	const [todos, setTodos] = useState([]);
+	const [todos, dispatch] = useReducer(reducer, []);
 	const [oldTodods, setOldTodos] = useState([]);
 
 	//for adding new todo
 	const addNewItem = (text, setText) => {
 		if (text === '') return;
 
-		setTodos([
-			...todos,
-			{
+		dispatch({
+			type: 'add',
+			payload: {
+				text,
 				id: Math.random(),
-				text: text,
 				isDone: false,
-			},
-		]);
+			}
+		})
 		
 		setOldTodos(todos)
 		setText('');
@@ -26,7 +70,9 @@ function App() {
 
 	//for deleting all todos
 	const deleteAllTodos = () => {
-		setTodos([]);
+		dispatch({
+			type: 'delete_all',
+		})
 		setOldTodos([]);
 	};
 
@@ -36,45 +82,64 @@ function App() {
 		const updatedTodos = todos.map((item) =>
 			item.id === todo.id ? todo : item
 		);
-		setTodos(updatedTodos);
+		dispatch({
+			type: 'done',
+			payload: updatedTodos
+		})
 	};
 
 	//for deleting todo
 	const deleteTodo = (todo) => {
-		setTodos(todos.filter((to) => to.id !== todo.id));
+		dispatch({
+			type: 'delete_todo',
+			payload: todos.filter((to) => to.id !== todo.id)
+		})
 		setOldTodos(todos)
 	};
 
-	//for searching 
+// for searching 
 	const handleSearchClick = (text, setText) => {
 		const filteredTodos = todos.filter(todo => {
 			if(todo.text.toLowerCase().includes(text.toLowerCase())) {
 				return todo;
 			}
 		})
-		setTodos(filteredTodos);
+		dispatch({
+			type: 'search',
+			payload: filteredTodos
+		})
 		setText('');
 	}
 
 	//for returning old state 
 	const handleAllClick = () => {
-		setTodos([...oldTodods]);
+		dispatch({
+			type: 'all',
+			payload: oldTodods
+		})
 	}
 
-	//for searching done todos 
+//for searching done todos 
 	const handleDoneClick = () => {
 		const doneTodos = todos.filter(todo => {
 			return todo.isDone === true;
 		})
-		setTodos([...doneTodos]);
+		dispatch({
+			type: 'filter_done_todos',
+			payload: doneTodos
+		})
 	}
 
-	//for searching undone todos
+//for searching undone todos
 	const handleUndoneClick = () => {
 		const undoneTodos = todos.filter(todo => {
 			return todo.isDone === false;
 		})
-		setTodos([...undoneTodos]);
+		dispatch({
+			type: 'filter_undone_todos',
+			payload: undoneTodos
+		})
+
 	}
 
 	return (
