@@ -47,7 +47,6 @@ function App() {
 
 	//for searching 
 	const handleSearchClick = (text, setText) => {
-		setOldTodos([...todos]);
 		const filteredTodos = todos.filter(todo => {
 			if(todo.text.toLowerCase().includes(text.toLowerCase())) {
 				return todo;
@@ -64,7 +63,6 @@ function App() {
 
 	//for searching done todos 
 	const handleDoneClick = () => {
-		setOldTodos([...todos]);
 		const doneTodos = todos.filter(todo => {
 			return todo.isDone === true;
 		})
@@ -73,7 +71,6 @@ function App() {
 
 	//for searching undone todos
 	const handleUndoneClick = () => {
-		setOldTodos([...todos]);
 		const undoneTodos = todos.filter(todo => {
 			return todo.isDone === false;
 		})

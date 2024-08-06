@@ -30,7 +30,7 @@ function TodoForm({
 				addNewItem(text, setText)
 			}
 		}}
-	></input>
+	/>
 
 	<div className='ButtonsSpace'>
 		{/* button for adding new todo */}
